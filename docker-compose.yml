@@ -1,0 +1,18 @@
+version: '3'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    hostname: 'git.chrisdevstudio.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://git.chrisdevstudio.com'
+        letsencrypt['enable'] = true
+    ports:
+      - "8929:80"
+      - "2222:22"
+    volumes:
+      - /srv/gitlab/config:/etc/gitlab
+      - /srv/gitlab/logs:/var/log/gitlab
+      - /srv/gitlab/data:/var/opt/gitlab
